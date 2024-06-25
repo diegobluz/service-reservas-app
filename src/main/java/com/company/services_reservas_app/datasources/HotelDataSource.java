@@ -15,4 +15,8 @@ public class HotelDataSource {
     public HotelDataSource(HotelRepository hotelRepository){
         this.hotelRepository = hotelRepository;
     }
+
+    public List<Hotel> hotelList(){
+        return hotelRepository.findAll();
+    }
 }

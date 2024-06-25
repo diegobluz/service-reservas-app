@@ -1,9 +1,12 @@
 package com.company.services_reservas_app.interactors;
 
+import com.company.services_reservas_app.datasources.HotelDataSource;
 import com.company.services_reservas_app.repositories.HotelRepository;
 import com.company.services_reservas_app.entities.Hotel;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HotelUseCase {
@@ -13,7 +16,6 @@ public class HotelUseCase {
     public HotelUseCase(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
     }
-
 
     public Hotel execute(Long id) {
         Hotel hotel = hotelRepository.getHotel(id);
