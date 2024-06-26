@@ -10,21 +10,24 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column (nullable = false)
     private String nome;
-
+    @Column (nullable = false)
     private String endereco;
+    @Column(nullable = false)
     private String cidade;
+    @Column(nullable = false)
     private String estado;
+    @Column(nullable = false)
     private String pais;
 
-
+    @Column(nullable = true)
     private int numeroEstrelas;
 
-
+    @Column(nullable = false)
     private String descricao;
 
-
+    @Column(nullable = true)
     private double precoPorNoite;
 
     //Construtor padrão

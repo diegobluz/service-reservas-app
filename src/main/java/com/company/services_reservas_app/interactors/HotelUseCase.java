@@ -1,12 +1,10 @@
 package com.company.services_reservas_app.interactors;
 
-import com.company.services_reservas_app.datasources.HotelDataSource;
 import com.company.services_reservas_app.repositories.HotelRepository;
 import com.company.services_reservas_app.entities.Hotel;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelUseCase {
@@ -17,8 +15,8 @@ public class HotelUseCase {
         this.hotelRepository = hotelRepository;
     }
 
-    public Hotel execute(Long id) {
-        Hotel hotel = hotelRepository.getHotel(id);
+    public Optional<Hotel> execute(Long id) {
+        Optional<Hotel> hotel = hotelRepository.findById(id);
 
         if (hotel == null) {
             System.out.println("Hotel não encontrado.");
