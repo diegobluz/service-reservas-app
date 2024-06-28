@@ -120,56 +120,5 @@ paths:
           pac:
             summary: Summary
             value: 2
-  /sistema-de-reserva/:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReservaRequest'
-      summary: Summary...
-      description: Description get
-      operationId: reservaId
-      responses:
-        '200':
-          description: Description 200
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReservaResponse'
-              examples:
-                grupo:
-                  summary: summary grupo
-                  value: |-
-                    {"id": "1", "name": "Grupo"}
-                pac:
-                  summary: summary
-                  value: |-
-                    {"id": "2", "name": "Pac"}
-        '204':
-          description: Description 204
-        '400':
-          description: Description default
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReservaError'
-        '404':
-          description: Description default
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReservaError'
-        '500':
-          description: Description default
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReservaError'
-        default:
-          description: Description default
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReservaError'
+
 

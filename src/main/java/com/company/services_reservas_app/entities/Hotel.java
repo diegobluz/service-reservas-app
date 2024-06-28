@@ -1,57 +1,17 @@
 package com.company.services_reservas_app.entities;
 
-import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
-
-@Entity
-@Table (name = "hotel")
 public class Hotel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column (nullable = false)
     private String nome;
-    @Column (nullable = false)
     private String endereco;
-    @Column(nullable = false)
     private String cidade;
-    @Column(nullable = false)
     private String estado;
-    @Column(nullable = false)
     private String pais;
-
-    @Column(nullable = true)
     private int numeroEstrelas;
-
-    @Column(nullable = false)
     private String descricao;
-
-    @Column(nullable = true)
     private double precoPorNoite;
 
-    //Construtor padrão
-
-    public Hotel() {
-    }
-
-    //Construtor com os parâmetros
-
-    public Hotel(Long id, String nome, String endereco, String cidade, String estado, String pais, int numeroEstrelas, String descricao, double precoPorNoite) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.pais = pais;
-        this.numeroEstrelas = numeroEstrelas;
-        this.descricao = descricao;
-        this.precoPorNoite = precoPorNoite;
-    }
-
-
     // Getters e Setters
-
     public Long getId() {
         return id;
     }
