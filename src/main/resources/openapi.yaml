@@ -67,6 +67,68 @@ components:
           type: string
         numeroHospedes:
           type: string
+    ClienteRequest:
+      type: object
+      properties:
+        nomeCompleto:
+          type: string
+        telefone:
+          type: string
+        email:
+          type: string
+        cpf:
+          type: string
+        dataNascimento:
+          type: string
+          format: date
+        sexo:
+          type: string
+        endereco:
+          $ref: '#/components/schemas/EnderecoRequest'
+    ClienteResponse:
+      type: object
+      properties:
+        nomeCompleto:
+          type: string
+        telefone:
+          type: string
+        email:
+          type: string
+        cpf:
+          type: string
+        dataNascimento:
+          type: string
+          format: date
+        sexo:
+          type: string
+        endereco:
+          $ref: '#/components/schemas/EnderecoResponse'
+    EnderecoRequest:
+      type: object
+      properties:
+        rua:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        cep:
+          type: string
+        complemento:
+          type:  string
+    EnderecoResponse:
+      type: object
+      properties:
+        rua:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+        cep:
+          type: string
+        complemento:
+          type: string
   responses:
     GeneralError:
       description: General Error

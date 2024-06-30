@@ -1,7 +1,7 @@
 package com.company.services_reservas_app.mapper;
 
 
-import com.company.services_reservas_app.entities.Hotel;
+
 import com.company.services_reservas_app.entities.Reserva;
 import com.company.services_reservas_app.transportlayers.openapi.model.ReservaRequest;
 import com.company.services_reservas_app.transportlayers.openapi.model.ReservaResponse;

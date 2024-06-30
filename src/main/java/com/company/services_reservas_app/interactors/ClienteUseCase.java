@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.company.services_reservas_app.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 @Service
 public class ClienteUseCase {
     private final ClienteRepository clienteRepository;
@@ -26,6 +28,10 @@ public class ClienteUseCase {
         Endereco endereco = enderecoRepository.save(cliente.getEndereco());
         cliente.setEndereco(endereco);
         return clienteRepository.save(cliente);
+    }
+
+    public Optional<Cliente> execute(Cliente cliente) {
+        return null;
     }
 
 
