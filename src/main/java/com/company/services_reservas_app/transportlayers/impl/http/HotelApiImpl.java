@@ -16,7 +16,7 @@ import java.time.LocalDate;
 //RestController define a classe como controlador da API REST
 @RestController
 //RequestMapping é usada para mapear requisições web para os métodos criados dentro de uma controller
-@RequestMapping("/")
+@RequestMapping("/api")
 public class HotelApiImpl implements SistemaDeReservaApi {
 
     @Autowired(required = true)

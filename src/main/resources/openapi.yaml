@@ -12,12 +12,8 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: "1.0"
 servers:
+  - url: http://localhost:5000/services_reservas_app
   - url: https://apps-dev.grupo.com.br/sample
-    description: Development server
-  - url: https://apps-hml.grupo.com.br/sample
-    description: Staging server
-  - url: https://apps-prd.grupo.com.br/sample
-    description: Production server
 components:
   schemas:
     GeneralError:
@@ -80,11 +76,10 @@ components:
           type: string
         dataNascimento:
           type: string
-          format: date
         sexo:
           type: string
         endereco:
-          $ref: '#/components/schemas/EnderecoRequest'
+          type: string
     ClienteResponse:
       type: object
       properties:
@@ -98,11 +93,10 @@ components:
           type: string
         dataNascimento:
           type: string
-          format: date
         sexo:
           type: string
         endereco:
-          $ref: '#/components/schemas/EnderecoResponse'
+          type: string
     EnderecoRequest:
       type: object
       properties:
@@ -137,50 +131,92 @@ components:
           schema:
             $ref: '#/components/schemas/GeneralError'
 paths:
-  /sample/{id}:
-    get:
-      summary: Summary...
-      description: Description get
-      operationId: get
+  /cadastrar-new-cliente:
+    post:
+      summary: Registrar-um-cliente
+      requestBody:
+        description: Client data to be registered
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cpf:
+                  type: string
+                nome_completo:
+                  type: string
+                sexo:
+                  type: string
+                telefone:
+                  type: string
+                email:
+                  type: string
+                dataNascimento:
+                  type: string
+                endereco:
+                  type: object
+                  properties:
+                    cep:
+                      type: string
+                    rua:
+                      type: string
+                    complemento:
+                      type: string
+                    estado:
+                      type: string
+                    cidade:
+                      type: string
       responses:
         '200':
-          description: Description 200
+          description: Reservation successfully created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SampleResponse'
-              examples:
-                grupo:
-                  summary: summary grupo
-                  value: |-
-                    {"id": "1", "name": "Grupo"}
-                pac:
-                  summary: summary
-                  value: |-
-                    {"id": "2", "name": "Pac"}
-        '204':
-          description: Description 204
-        default:
-          description: Description default
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GeneralError'
-    parameters:
-      - name: id
-        in: path
-        description: Description Parameter
+                type: object
+                properties:
+                  nomeCliente:
+                    type: string
+                  dataEntrada:
+                    type: string
+                  dataSaida:
+                    type: string
+                  numeroHospedes:
+                    type: integer
+  /new_reservas:
+    post:
+      summary: Criar reserva para um cliente
+      requestBody:
+        description: Reservation data to be created
         required: true
-        schema:
-          type: integer
-          format: int32
-        style: simple
-        examples:
-          grupo:
-            summary: Summary Grupo
-            value: 1
-          pac:
-            summary: Summary
-            value: 2
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nomeCliente:
+                  type: string
+                dataEntrada:
+                  type: string
+                dataSaida:
+                  type: string
+                numeroHospedes:
+                  type: integer
+      responses:
+        '200':
+          description: Reservation successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nomeCliente:
+                    type: string
+                  dataEntrada:
+                    type: string
+                  dataSaida:
+                    type: string
+                  numeroHospedes:
+                    type: integer
 
 

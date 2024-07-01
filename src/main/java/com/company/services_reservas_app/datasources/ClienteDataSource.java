@@ -8,6 +8,14 @@ import java.util.Optional;
 
 @Service
 public class ClienteDataSource {
+    @Autowired(required = true)
+    private ClienteRepository clienteRepository;
+
+    public ClienteDataSource(ClienteRepository clienteRepository){
+        this.clienteRepository = clienteRepository;
+    }
+
+
 
 
 }
