@@ -15,6 +15,9 @@ public class Cliente {
     private String sexo;
     private Endereco endereco;
 
+    public Cliente() {
+    }
+
     public Long getId() {
         return id;
     }

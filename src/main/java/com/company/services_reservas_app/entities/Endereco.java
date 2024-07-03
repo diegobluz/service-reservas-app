@@ -8,6 +8,12 @@ public class Endereco {
     private String cep;
     private String complemento;
 
+    //construtor vazio
+
+
+    public Endereco() {
+    }
+
     // getters e setters
     public Long getId() {
         return id;

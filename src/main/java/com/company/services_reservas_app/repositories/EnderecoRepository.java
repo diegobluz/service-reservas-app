@@ -1,7 +1,8 @@
 package com.company.services_reservas_app.repositories;
 
 import com.company.services_reservas_app.entities.Endereco;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+public interface EnderecoRepository  {
+    Optional<Endereco> obterEndereco(Endereco endereco);
 }

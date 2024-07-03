@@ -7,15 +7,17 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ClienteDataSource {
-    @Autowired(required = true)
-    private ClienteRepository clienteRepository;
+public class ClienteDataSource implements ClienteRepository {
+    //@Autowired(required = true)
+    //private ClienteRepositoryJPA clienteRepository;
 
-    public ClienteDataSource(ClienteRepository clienteRepository){
-        this.clienteRepository = clienteRepository;
+    //public ClienteDataSource(ClienteRepositoryJPA clienteRepository){
+      //  this.clienteRepository = clienteRepository;
+    //}
+
+    @Override
+    public Optional<Cliente> obterCpf(String cpf) {
+        //clienteRepository.findByCpf(cpf);
+        return Optional.empty();
     }
-
-
-
-
 }

@@ -1,6 +1,5 @@
 package com.company.services_reservas_app.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Reserva {
 

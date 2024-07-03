@@ -79,7 +79,7 @@ components:
         sexo:
           type: string
         endereco:
-          type: string
+          $ref: '#/components/schemas/EnderecoRequest'
     ClienteResponse:
       type: object
       properties:
@@ -96,7 +96,7 @@ components:
         sexo:
           type: string
         endereco:
-          type: string
+          $ref: '#/components/schemas/EnderecoResponse'
     EnderecoRequest:
       type: object
       properties:
@@ -131,92 +131,73 @@ components:
           schema:
             $ref: '#/components/schemas/GeneralError'
 paths:
-  /cadastrar-new-cliente:
+  /create-client:
     post:
-      summary: Registrar-um-cliente
+      tags:
+        - client
+      summary: Add a new client
+      description: Add a new client
+      operationId: addClient
       requestBody:
-        description: Client data to be registered
-        required: true
+        description: Create a new client
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                cpf:
-                  type: string
-                nome_completo:
-                  type: string
-                sexo:
-                  type: string
-                telefone:
-                  type: string
-                email:
-                  type: string
-                dataNascimento:
-                  type: string
-                endereco:
-                  type: object
-                  properties:
-                    cep:
-                      type: string
-                    rua:
-                      type: string
-                    complemento:
-                      type: string
-                    estado:
-                      type: string
-                    cidade:
-                      type: string
+              $ref: '#/components/schemas/ClienteRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ClienteRequest'
+        required: true
       responses:
         '200':
-          description: Reservation successfully created
+          description: Client created with sucess
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  nomeCliente:
-                    type: string
-                  dataEntrada:
-                    type: string
-                  dataSaida:
-                    type: string
-                  numeroHospedes:
-                    type: integer
-  /new_reservas:
+                $ref: '#/components/schemas/ClienteResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ClienteResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /create-reserve:
     post:
-      summary: Criar reserva para um cliente
+      tags:
+        - reserve
+      summary: Add a new reserve
+      description: Add a new reserve
+      operationId: addReserve
       requestBody:
-        description: Reservation data to be created
-        required: true
+        description: Create a new reserve
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                nomeCliente:
-                  type: string
-                dataEntrada:
-                  type: string
-                dataSaida:
-                  type: string
-                numeroHospedes:
-                  type: integer
+              $ref: '#/components/schemas/ReservaRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ReservaRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReserveRequest'
+        required: true
       responses:
         '200':
-          description: Reservation successfully created
+          description: Successful operation
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  nomeCliente:
-                    type: string
-                  dataEntrada:
-                    type: string
-                  dataSaida:
-                    type: string
-                  numeroHospedes:
-                    type: integer
+                $ref: '#/components/schemas/ReservaResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ReservaResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
 
 
