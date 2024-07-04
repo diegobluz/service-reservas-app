@@ -14,6 +14,7 @@ info:
 servers:
   - url: http://localhost:5000/services_reservas_app
   - url: https://apps-dev.grupo.com.br/sample
+  - url: http://localhost:9090/services_reservas_app
 components:
   schemas:
     GeneralError:

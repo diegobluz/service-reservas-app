@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/services_reservas_app")
 public class ClienteApiImpl implements CreateClientApi {
     @Autowired(required = true)
     private final ClienteUseCase clienteUseCase;
@@ -23,6 +23,7 @@ public class ClienteApiImpl implements CreateClientApi {
     }
 
     @Override
+    @PostMapping("/create-client")
     public ResponseEntity<ClienteResponse> addClient(ClienteRequest clienteRequest) {
         Cliente cliente = ClienteMapper.INSTANCE.map(clienteRequest);
         //clienteUseCase.execute(cliente);
