@@ -12,9 +12,9 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: "1.0"
 servers:
-  - url: http://localhost:5000/services_reservas_app
+  - url: http://localhost:5000/service--reservas-app
   - url: https://apps-dev.grupo.com.br/sample
-  - url: http://localhost:9090/services_reservas_app
+  - url: http://localhost:9090/service--reservas-app
 components:
   schemas:
     GeneralError:

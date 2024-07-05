@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.company.services_reservas_app</groupId>
-    <artifactId>service_reservas_app</artifactId>
+    <groupId>com.company.service--reservas-app</groupId>
+    <artifactId>service--reservas-app</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>services_reservas_app</name>
+    <name>services--reservas-app</name>
 
     <properties>
         <java.version>21</java.version>
@@ -195,8 +195,8 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>com.company.services_reservas_app.transportlayers.openapi.api</apiPackage>
-                            <modelPackage>com.company.services_reservas_app.transportlayers.openapi.model</modelPackage>
+                            <apiPackage>com.company.service--reservas-app.transportlayers.openapi.api</apiPackage>
+                            <modelPackage>com.company.service--reservas-app.transportlayers.openapi.model</modelPackage>
                             <skipValidateSpec>true</skipValidateSpec>
                             <generateAliasAsModel>false</generateAliasAsModel>
                             <enablePostProcessFile>false</enablePostProcessFile>
