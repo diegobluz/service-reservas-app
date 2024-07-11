@@ -8,7 +8,6 @@ import com.company.services_reservas_app.interactors.ClienteUseCase;
 import com.company.services_reservas_app.transportlayers.impl.mapper.ClienteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
