@@ -25,7 +25,19 @@ components:
           format: int32
         message:
           type: string
-    ReservaError:
+    ResponseClienteError:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Error Status
+        errorCode:
+          type: string
+          description: ErrorCode
+        message:
+          type: string
+          description: Error Message
+    ErrorReserva:
       type: object
       properties:
         code:
@@ -42,7 +54,7 @@ components:
           format: int32
         name:
           type: string
-    ReservaRequest:
+    RequestReserva:
       type: object
       properties:
         nomeCliente:
@@ -53,7 +65,7 @@ components:
           type: string
         numeroHospedes:
           type: string
-    ReservaResponse:
+    ResponseReserva:
       type: object
       properties:
         nomeCliente:
@@ -64,7 +76,7 @@ components:
           type: string
         numeroHospedes:
           type: string
-    ClienteRequest:
+    RequestCliente:
       type: object
       properties:
         nomeCompleto:
@@ -80,8 +92,8 @@ components:
         sexo:
           type: string
         endereco:
-          $ref: '#/components/schemas/EnderecoRequest'
-    ClienteResponse:
+          $ref: '#/components/schemas/RequestEndereco'
+    ResponseCliente:
       type: object
       properties:
         nomeCompleto:
@@ -97,21 +109,29 @@ components:
         sexo:
           type: string
         endereco:
-          $ref: '#/components/schemas/EnderecoResponse'
-    EnderecoRequest:
+          $ref: '#/components/schemas/ResponseEndereco'
+    RequestEndereco:
       type: object
       properties:
-        rua:
+        logradouro:
           type: string
-        cidade:
+        bairro:
           type: string
-        estado:
+        localidade:
+          type: string
+        uf:
+          max: 2
+          min: 2
           type: string
         cep:
+          max: 9
+          min: 8
+          type: string
+        numero:
           type: string
         complemento:
-          type:  string
-    EnderecoResponse:
+          type: string
+    ResponseEndereco:
       type: object
       properties:
         rua:
@@ -132,25 +152,26 @@ components:
           schema:
             $ref: '#/components/schemas/GeneralError'
 paths:
-  /create-client:
+
+  /cliente:
     post:
       tags:
         - client
-      summary: Add a new client
-      description: Add a new client
-      operationId: addClient
+      summary: Create new client
+      description: Create new client
+      operationId: createClient
       requestBody:
         description: Create a new client
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ClienteRequest'
+              $ref: '#/components/schemas/RequestCliente'
           application/xml:
             schema:
-              $ref: '#/components/schemas/ClienteRequest'
+              $ref: '#/components/schemas/RequestCliente'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ClienteRequest'
+              $ref: '#/components/schemas/RequestCliente'
         required: true
       responses:
         '200':
@@ -158,33 +179,98 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClienteResponse'
+                $ref: '#/components/schemas/ResponseCliente'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ClienteResponse'
+                $ref: '#/components/schemas/ResponseCliente'
         '400':
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseClienteError'
         '422':
           description: Validation exception
-  /create-reserve:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseClienteError'
+        '500':
+          description: Internal Server Err
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseClienteError'
+    /getCliente/{cpf}:
+      get:
+        tags:
+          - cpfCliente
+        summary: Find cliente by cpf
+        description: Returns a client
+        operationId: getCliente
+        parameters:
+          - name: cpf
+            in: path
+            description: cpf of client to return
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseCliente'
+              application/xml:
+                schema:
+                  $ref: '#/components/schemas/ResponseCliente'
+          '404':
+            description: Client not found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseClienteError'
+          '400':
+            description: Invalid input
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseClienteError'
+          '422':
+            description: Validation exception
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseClienteError'
+          '500':
+            description: Internal Server Err
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseClienteError'
+
+
+  /reservas:
     post:
       tags:
         - reserve
-      summary: Add a new reserve
-      description: Add a new reserve
-      operationId: addReserve
+      summary: Create a new reserva
+      description: Create a new reserva
+      operationId: createReserva
       requestBody:
-        description: Create a new reserve
+        description: Create a new reserva
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReservaRequest'
+              $ref: '#/components/schemas/RequestReserva'
           application/xml:
             schema:
-              $ref: '#/components/schemas/ReservaRequest'
+              $ref: '#/components/schemas/RequestReserva'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ReserveRequest'
+              $ref: '#/components/schemas/RequestReserve'
         required: true
       responses:
         '200':
@@ -192,10 +278,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReservaResponse'
+                $ref: '#/components/schemas/ResponseReserva'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ReservaResponse'
+                $ref: '#/components/schemas/ResponseReserva'
         '400':
           description: Invalid input
         '422':
