@@ -1,15 +1,35 @@
 package com.company.services_reservas_app.entities;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "cliente")
 public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomeCompleto;
-    private String telefone;
-    private String email;
+
+    @Column(name = "cpf", length = 11)
     private String cpf;
-    private LocalDate dataNascimento;
+
+    @Column(name = "nome_completo", length = 60)
+    private String nomeCompleto;
+
+    @Column(name = "telefone", length = 12)
+    private String telefone;
+
+    @Column(name = "email", length = 40)
+    private String email;
+
+    @Column(name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    private Date dataNascimento;
+
+    @Column(name = "sexo", length = 11)
     private String sexo;
-    private Endereco endereco;
+
 
     public Cliente() {
     }
@@ -20,6 +40,14 @@ public class Cliente {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNomeCompleto() {
@@ -46,19 +74,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -68,13 +88,5 @@ public class Cliente {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 }
