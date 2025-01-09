@@ -9,6 +9,7 @@ import com.company.services_reservas_app.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -51,6 +52,8 @@ public class ClienteDataSourceImpl implements ClienteRepository {
         cliente.setDataNascimento(vo.getDataNascimento());
         cliente.setTelefone(vo.getTelefone());
         cliente.setSexo(vo.getSexo());
+        cliente.setDataCadastro(LocalDateTime.now());
+        cliente.setDataUltimaAtualizacao(LocalDateTime.now());
         //cliente.setEndereco(vo.getEndereco());
         return cliente;
     }

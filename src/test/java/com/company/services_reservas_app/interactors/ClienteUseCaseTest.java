@@ -2,8 +2,10 @@ package com.company.services_reservas_app.interactors;
 
 import com.company.services_reservas_app.config.exceptions.ClienteError;
 import com.company.services_reservas_app.entities.response.ClienteVO;
+import com.company.services_reservas_app.entities.response.EnderecoVO;
 import com.company.services_reservas_app.factory.ClienteFactory;
 import com.company.services_reservas_app.repositories.ClienteRepository;
+import com.company.services_reservas_app.repositories.EnderecoRepository;
 import com.company.services_reservas_app.repositories.HotelRepository;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -35,6 +37,12 @@ class ClienteUseCaseTest {
     private ClienteRepository clienteRepository;
 
     private ClienteVO clienteVO;
+
+    @Mock
+    private EnderecoRepository enderecoRepository;
+
+    private EnderecoVO enderecoVO;
+
 
 
 
@@ -92,4 +100,5 @@ class ClienteUseCaseTest {
 
         assertThrows(ClienteError.class, () -> clienteUseCase.execute(clienteVO));
     }
+
 }

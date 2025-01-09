@@ -1,6 +1,7 @@
 package com.company.services_reservas_app.interactors;
 
 import com.company.services_reservas_app.config.exceptions.ClienteError;
+import com.company.services_reservas_app.config.exceptions.EnderecoError;
 import com.company.services_reservas_app.datasources.repository.endereco.response.ResponseEndereco;
 import com.company.services_reservas_app.entities.response.ClienteVO;
 import com.company.services_reservas_app.entities.response.EnderecoVO;
@@ -28,6 +29,7 @@ public class ClienteUseCase {
     private static String MSG_CLIENTE_JA_CADASTRADO = "Cliente já cadastrado na base de dados.";
     private static String MSG_CPF_OBIRIGATORIO = "O CPF não pode ser null e deve ser valido.";
     private static String MSG_ENDERECO_INVALIDO = "O cep informadao não é valido.";
+    private static String MSG_CPF_INVALIDO = "O CPF deve ser valido.";
 
     private static String MSG_CLIENTE_MENOR_IDADE = "Não é possível cadastrar um cliente menor de idade.";
 
@@ -106,7 +108,11 @@ public class ClienteUseCase {
         vo.setComplemento(endereco.getComplemento());
         vo.setUf(endereco.getUf());
         vo.setLocalidade(endereco.getLocalidade());
-        vo.setCpf(cpf);
+        vo.setCpfCliente(cpf);
+        if(vo.getCpfCliente() == null){
+            LOG.info((MSG_CPF_INVALIDO));
+            throw new ClienteError(String.valueOf(HttpStatus.BAD_REQUEST.value()), "ERROR_CPF_INVALIDO", MSG_CPF_INVALIDO);
+        }
         return vo;
     }
 

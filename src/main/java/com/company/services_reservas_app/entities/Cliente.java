@@ -1,6 +1,7 @@
 package com.company.services_reservas_app.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -29,6 +30,14 @@ public class Cliente {
 
     @Column(name = "sexo", length = 11)
     private String sexo;
+
+    @Column(name = "data_cadastro")
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dataCadastro;
+
+    @Column(name = "data_ultima_atualizacao")
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dataUltimaAtualizacao;
 
 
     public Cliente() {
@@ -88,5 +97,21 @@ public class Cliente {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public LocalDateTime getDataUltimaAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
+
+    public void setDataUltimaAtualizacao(LocalDateTime dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 }
