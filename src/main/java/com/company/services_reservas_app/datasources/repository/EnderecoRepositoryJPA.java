@@ -1,16 +1,14 @@
 package com.company.services_reservas_app.datasources.repository;
 
-import com.company.services_reservas_app.entities.Cliente;
+import com.company.services_reservas_app.entities.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface  ClienteRepositoryJPA extends JpaRepository<Cliente, Long> {
+public interface EnderecoRepositoryJPA extends JpaRepository<Endereco, Long> {
 
-    Cliente findByCpf(String cpf);
+    Endereco findByCpf(String cpf);
 
-    @Override
-    List<Cliente> findAll();
-
+    List<Endereco> findByCep(String cep);
 }

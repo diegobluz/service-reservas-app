@@ -40,6 +40,4 @@ public class ClienteApiImpl implements ClienteApi {
 
         return ResponseEntity.ok(clienteResponse);
     }
-
-
 }
