@@ -29,13 +29,15 @@ public interface ClienteMapper {
     })
     ClienteVO map(RequestCliente request, RequestEndereco endereco);
 
-
-    @Mapping(source = "vo.nomeCompleto", target = "nomeCompleto")
-    @Mapping(source = "vo.telefone", target = "telefone")
-    @Mapping(source = "vo.email", target = "email")
-    @Mapping(source = "vo.cpf", target = "cpf")
-    @Mapping(source = "vo.dataNascimento", target = "dataNascimento", qualifiedByName = "convertDataNascimento" )
-    @Mapping(source = "vo.sexo", target = "sexo")
+    @Mappings({
+            @Mapping(source = "vo.nomeCompleto", target = "nomeCompleto"),
+            @Mapping(source = "vo.telefone", target = "telefone"),
+            @Mapping(source = "vo.email", target = "email"),
+            @Mapping(source = "vo.cpf", target = "cpf"),
+            @Mapping(source = "vo.dataNascimento", target = "dataNascimento", qualifiedByName = "convertDataNascimento"),
+            @Mapping(source = "vo.sexo", target = "sexo"),
+            @Mapping(source = "vo.endereco", target = "endereco")
+    })
     ResponseCliente mapResponse(ClienteVO vo);
 
 

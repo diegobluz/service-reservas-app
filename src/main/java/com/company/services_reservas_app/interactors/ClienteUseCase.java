@@ -1,7 +1,6 @@
 package com.company.services_reservas_app.interactors;
 
 import com.company.services_reservas_app.config.exceptions.ClienteError;
-import com.company.services_reservas_app.config.exceptions.EnderecoError;
 import com.company.services_reservas_app.datasources.repository.endereco.response.ResponseEndereco;
 import com.company.services_reservas_app.entities.response.ClienteVO;
 import com.company.services_reservas_app.entities.response.EnderecoVO;
@@ -62,18 +61,13 @@ public class ClienteUseCase {
              * Valida se cliente é maior de 18
              */
             validarDataNasc(cliente.getDataNascimento());
-
             /*
              * Validar cep do cliente
              */
             EnderecoVO requestEndereco = cliente.getEndereco();
             ResponseEndereco endereco = obterEndereco(requestEndereco);
 
-
-            responseCliente = saveCliente(cliente, endereco, requestEndereco.getNumero());
-
-
-
+            responseCliente = saveCliente(cliente, endereco, requestEndereco);
         }catch (ClienteError e){
 
             LOG.error("Cliente Error: " + e.getStatus() +  " -  Code: "+e.getCode() + " -  descricao: "+ e.getDescription());
@@ -88,31 +82,33 @@ public class ClienteUseCase {
         return responseCliente;
     }
 
-    private Optional<ClienteVO> saveCliente(ClienteVO cliente, ResponseEndereco responseEndereco, String enderecoNumero) {
-        EnderecoVO enderecoBuilder = enderecoBuilder(responseEndereco, cliente.getCpf(), enderecoNumero);
+    private Optional<ClienteVO> saveCliente(ClienteVO cliente, ResponseEndereco responseEndereco, EnderecoVO requestEndereco) {
+        EnderecoVO enderecoBuilder = enderecoBuilder(responseEndereco, cliente.getCpf(), requestEndereco);
 
         EnderecoVO endereco = enderecoRepository.save(enderecoBuilder);
         cliente.setEndereco(endereco);
-
-        return Optional.of(clienteRepository.save(cliente));
+        ClienteVO save = clienteRepository.save(cliente);
+        return clienteBuilder(save, endereco);
     }
 
-    private EnderecoVO enderecoBuilder(ResponseEndereco endereco, String cpf, String numero) {
+    private Optional<ClienteVO> clienteBuilder(ClienteVO cliente, EnderecoVO endereco) {
+        cliente.setEndereco(endereco);
+        return Optional.of(cliente);
+    }
+
+
+    private EnderecoVO enderecoBuilder(ResponseEndereco endereco, String cpf, EnderecoVO requestEndereco) {
 
         EnderecoVO vo = new EnderecoVO();
 
         vo.setCep(endereco.getCep());
         vo.setLogradouro(endereco.getLogradouro());
         vo.setBairro(endereco.getBairro());
-        vo.setNumero(numero);
-        vo.setComplemento(endereco.getComplemento());
+        vo.setNumero(requestEndereco.getNumero());
+        vo.setComplemento(requestEndereco.getComplemento());
         vo.setUf(endereco.getUf());
         vo.setLocalidade(endereco.getLocalidade());
         vo.setCpfCliente(cpf);
-        if(vo.getCpfCliente() == null){
-            LOG.info((MSG_CPF_INVALIDO));
-            throw new ClienteError(String.valueOf(HttpStatus.BAD_REQUEST.value()), "ERROR_CPF_INVALIDO", MSG_CPF_INVALIDO);
-        }
         return vo;
     }
 

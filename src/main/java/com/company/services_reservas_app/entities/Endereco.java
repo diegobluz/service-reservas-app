@@ -32,8 +32,8 @@ public class Endereco {
     @Column(name = "uf", length = 2)
     private String uf;
 
-    @JoinColumn(name = "cpf_cliente", unique = true)
-    private Cliente cliente;
+    @Column(name = "cpf", unique = true)
+    private String cpf;
 
     @Column(name = "data_cadastro")
     //@Temporal(TemporalType.TIMESTAMP)
@@ -103,12 +103,12 @@ public class Endereco {
         this.localidade = localidade;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getUf() {
