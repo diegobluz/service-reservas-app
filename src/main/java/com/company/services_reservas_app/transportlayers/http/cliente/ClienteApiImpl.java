@@ -40,4 +40,17 @@ public class ClienteApiImpl implements ClienteApi {
 
         return ResponseEntity.ok(clienteResponse);
     }
+
+    @Override
+    public ResponseEntity<ResponseCliente> obterCliente(RequestCliente clienteRequest){
+        LOG.info("Pesquisando...");
+
+        ClienteVO vo = ClienteMapper.INSTANCE.map(clienteRequest, clienteRequest.getCpf());
+
+        Optional<ClienteVO> obCliente = clienteUseCase.execute(vo);
+
+        ResponseCliente cliente1 = ClienteMapper.INSTANCE.mapResponse(vo.getCpf());
+
+        return ResponseEntity.ok(cliente1);
+    }
 }

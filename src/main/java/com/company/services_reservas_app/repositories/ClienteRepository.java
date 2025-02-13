@@ -8,5 +8,7 @@ public interface ClienteRepository {
 
     ClienteVO obterCpf(String cpf);
 
+    Optional<ClienteVO> findByCpf(String cpf);
+
     ClienteVO save(ClienteVO cliente);
 }

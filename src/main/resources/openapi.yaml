@@ -207,7 +207,7 @@ paths:
           - cpfCliente
         summary: Find cliente by cpf
         description: Returns a client
-        operationId: getCliente
+        operationId: getClienteCpf
         parameters:
           - name: cpf
             in: path
@@ -245,7 +245,7 @@ paths:
                 schema:
                   $ref: '#/components/schemas/ResponseClienteError'
           '500':
-            description: Internal Server Err
+            description: Internal Server Error
             content:
               application/json:
                 schema:

@@ -1,6 +1,8 @@
 package com.company.services_reservas_app.interactors;
 
+import com.company.service__reservas_app.transportlayers.openapi.model.ResponseCliente;
 import com.company.services_reservas_app.config.exceptions.ClienteError;
+import com.company.services_reservas_app.datasources.repository.cliente.response.ResponseCliente;
 import com.company.services_reservas_app.datasources.repository.endereco.response.ResponseEndereco;
 import com.company.services_reservas_app.entities.response.ClienteVO;
 import com.company.services_reservas_app.entities.response.EnderecoVO;
@@ -29,8 +31,8 @@ public class ClienteUseCase {
     private static String MSG_CPF_OBIRIGATORIO = "O CPF não pode ser null e deve ser valido.";
     private static String MSG_ENDERECO_INVALIDO = "O cep informadao não é valido.";
     private static String MSG_CPF_INVALIDO = "O CPF deve ser valido.";
-
     private static String MSG_CLIENTE_MENOR_IDADE = "Não é possível cadastrar um cliente menor de idade.";
+    private static String MSG_CLIENTE_NAO_EXISTE = "Este CPF não existe no banco de dados ou não é válido";
 
 
     private final ClienteRepository clienteRepository;
@@ -68,6 +70,7 @@ public class ClienteUseCase {
             ResponseEndereco endereco = obterEndereco(requestEndereco);
 
             responseCliente = saveCliente(cliente, endereco, requestEndereco);
+
         }catch (ClienteError e){
 
             LOG.error("Cliente Error: " + e.getStatus() +  " -  Code: "+e.getCode() + " -  descricao: "+ e.getDescription());
@@ -120,6 +123,17 @@ public class ClienteUseCase {
             throw new ClienteError(String.valueOf(HttpStatus.BAD_REQUEST.value()), "ERROR_CEP_INVALIDO", MSG_ENDERECO_INVALIDO);
         }
         return endereco;
+    }
+
+    //
+    private ResponseCliente obterCliente(ClienteVO cVO) {
+        ResponseCliente cliente1 = clienteRepository.findByCpf(cVO.getNomeCompleto());
+
+        if (Objects.isNull(cliente1)){
+            LOG.info(MSG_CLIENTE_NAO_EXISTE);
+            throw new ClienteError(String.valueOf(HttpStatus.BAD_REQUEST.value()),"ERROR_CPF", MSG_CLIENTE_NAO_EXISTE);
+        }
+        return cliente1;
     }
 
 
